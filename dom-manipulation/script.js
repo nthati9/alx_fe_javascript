@@ -10,11 +10,38 @@ function showRandomQuote() {
     const quoteDisplay = document.getElementById("quoteDisplay");
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
-    quoteDisplay.innerHTML = `"${randomQuote.text}" - ${randomQuote.category}`;
+    quoteDisplay.innerHTML = `"${randomQuote.text}" - <strong>${randomQuote.category}</strong>`;
+}
+
+function createAddQuoteForm() {
+    const formContainer = document.getElementById("quoteForm");
+
+   
+    const newQuoteTextInput = document.createElement("input");
+    newQuoteTextInput.id = "newQuoteText";
+    newQuoteTextInput.type = "text";
+    newQuoteTextInput.placeholder = "Enter a new quote";
+
+   
+    const newQuoteCategoryInput = document.createElement("input");
+    newQuoteCategoryInput.id = "newQuoteCategory";
+    newQuoteCategoryInput.type = "text";
+    newQuoteCategoryInput.placeholder = "Enter quote category";
+
+    
+    const addQuoteButton = document.createElement("button");
+    addQuoteButton.innerText = "Add Quote";
+    addQuoteButton.id = "addQuote";
+    addQuoteButton.onclick = addQuote;
+
+    
+    formContainer.appendChild(newQuoteTextInput);
+    formContainer.appendChild(newQuoteCategoryInput);
+    formContainer.appendChild(addQuoteButton);
 }
 
 
-function createAddQuoteForm() {
+function addQuote() {
     const newQuoteText = document.getElementById("newQuoteText").value;
     const newQuoteCategory = document.getElementById("newQuoteCategory").value;
 
@@ -27,7 +54,6 @@ function createAddQuoteForm() {
         document.getElementById("newQuoteText").value = '';
         document.getElementById("newQuoteCategory").value = '';
         
-        
         showRandomQuote();
     } else {
         alert("Please fill in both fields.");
@@ -36,7 +62,8 @@ function createAddQuoteForm() {
 
 
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
-document.getElementById("addQuote").addEventListener("click", addQuote);
 
 
+createAddQuoteForm();
 showRandomQuote();
+
