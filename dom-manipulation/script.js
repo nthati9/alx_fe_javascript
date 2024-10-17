@@ -70,20 +70,13 @@ function syncQuotes(serverQuotes) {
     if (updated) {
         localStorage.setItem('quotes', JSON.stringify(quotes));
         displayQuotes(quotes);
-        notifyUser("Quotes have been updated from the server.");
+        notifyUser("Quotes synced with server!"); // Alert user
     }
 }
 
 // Function to notify users of updates
 function notifyUser(message) {
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.className = 'notification'; // Add styling for notifications
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 3000); // Auto-remove after 3 seconds
+    alert(message); // Alert to notify the user
 }
 
 // Function to display quotes in the DOM
