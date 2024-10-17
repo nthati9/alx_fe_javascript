@@ -26,9 +26,8 @@ function filterQuotes() {
     const filteredQuotes = selectedCategory === 'all'
         ? quotes
         : quotes.filter(quote => quote.category === selectedCategory);
-    
+
     displayQuotes(filteredQuotes);
-    localStorage.setItem('lastSelectedCategory', selectedCategory); // Store selected category
 }
 
 // Function to display quotes in the DOM
@@ -36,11 +35,17 @@ function displayQuotes(filteredQuotes) {
     const quoteDisplay = document.getElementById('quoteDisplay');
     quoteDisplay.innerHTML = ''; // Clear previous quotes
 
-    filteredQuotes.forEach(quote => {
+    // Randomly select one quote from the filtered list
+    if (filteredQuotes.length > 0) {
+        const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
+        const randomQuote = filteredQuotes[randomIndex];
+        
         const quoteElement = document.createElement('div');
-        quoteElement.textContent = quote.text;
+        quoteElement.textContent = randomQuote.text;
         quoteDisplay.appendChild(quoteElement);
-    });
+    } else {
+        quoteDisplay.textContent = "No quotes available for this category.";
+    }
 }
 
 // Function to add a new quote and update categories
@@ -70,3 +75,4 @@ window.onload = function() {
     document.getElementById('categoryFilter').value = lastCategory;
     filterQuotes(); // Filter quotes based on the last selected category
 };
+
