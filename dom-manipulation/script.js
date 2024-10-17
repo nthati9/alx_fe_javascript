@@ -28,6 +28,9 @@ function filterQuotes() {
         : quotes.filter(quote => quote.category === selectedCategory);
 
     displayQuotes(filteredQuotes);
+    
+    // Store the last selected category in localStorage
+    localStorage.setItem('lastSelectedCategory', selectedCategory);
 }
 
 // Function to display quotes in the DOM
@@ -75,4 +78,5 @@ window.onload = function() {
     document.getElementById('categoryFilter').value = lastCategory;
     filterQuotes(); // Filter quotes based on the last selected category
 };
+
 
